@@ -20,7 +20,11 @@ exports.load = function(req, res, next, quizId){
 
 // GET /quizes
 exports.index = function(req, res) {
-	models.Quiz.findAll().then(
+	var strQuery = "%";
+	if (req.query.search !== undefined) {
+		strQuery = strQuery + req.query.search.replace(' ', '%') + "%";
+	}
+	models.Quiz.findAll({where: ["pregunta like ? order by pregunta", strQuery]}).then(
 		function(quizes){
 			res.render('quizes/index.ejs', {quizes: quizes});
 		}
