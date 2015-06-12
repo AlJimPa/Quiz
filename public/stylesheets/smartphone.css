@@ -3,7 +3,7 @@ body {
 	font-size: xx-large;
 }
 
-h2 span, section h3 {
+h2 span, section h3, .rem{
 	display: none;
 }
 
