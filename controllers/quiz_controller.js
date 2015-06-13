@@ -91,9 +91,22 @@ exports.update = function(req, res) {
 				req.quiz.save({fields: ["pregunta", "respuesta"]}).then(
 					function(){
 						res.redirect('/quizes');
-					}  //Redirección HTTP (URL relativo) a lista de preguntas
+					} //Redirección HTTP (URL relativo) a lista de preguntas
 				);
 			}
 		}
 	);	
+}
+
+//DELETE /quizes/
+exports.destroy = function(req, res) {
+	req.quiz.destroy().then(
+		function(){
+			res.redirect('/quizes');
+		} //Redirección HTTP (URL relativo) a lista de preguntas
+	).catch(
+		function(error){
+			next(error);
+		}
+	);
 }
