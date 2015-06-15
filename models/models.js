@@ -37,11 +37,17 @@ sequelize.sync().success(function() {
 	Quiz.count().success(function (count){
 		if(count == 0) {	// la tabla se inicializa solo si está vacía
 			Quiz.create({ pregunta: 'Capital de Italia', 
-						  respuesta: 'Roma'
+						  respuesta: 'Roma',
+						  tema: 'otros'
 					  });
 			Quiz.create({ pregunta: 'Capital de Portugal', 
-						  respuesta: 'Lisboa'
-					  })
+						  respuesta: 'Lisboa', 
+						  tema: 'otros'
+					  });
+			Quiz.create({ pregunta: 'Creador del kernel Linux', 
+						  respuesta: 'Linus Torvalds',
+						  tema: 'tecnologia'
+					  })  
 			.then(function(){console.log('Base de datos inicializada')});
 		};
 	});
