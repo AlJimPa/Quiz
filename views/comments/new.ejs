@@ -1,0 +1,7 @@
+	<b>Añadir comentario: </b><p>
+	<form method="post" action="/quizes/<%= quizId %>/comments">
+		<label for="textAreaComment" class="rem">Comentario</label>
+		<textArea name="comment[texto]" value="" 
+				  id="textAreaComment" rows="4" cols="80"></textArea>
+		<button type="submit">Enviar</button>
+	</form>
