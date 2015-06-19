@@ -3,7 +3,7 @@ var models = require('../models/models.js');
 //autoload
 exports.load = function(req, res, next, commentId) {
 	models.Comment.find({
-		where : {Id : Number(commentId)}
+		where : {id : Number(commentId)}
 	}).then(
 		function(comment) {
 			if (comment){
