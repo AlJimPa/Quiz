@@ -27,6 +27,31 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
 
+//auto-logout - almaceno la fecha como milisegundos en session.lastAccess
+app.use(function(req, res, next) {
+	if (req.session.user){
+		//para pruebas: 12s; version final: 2 minutos -> 120s -> 120000ms
+		var now = Date.now();
+		if (!req.session.lastAccess 
+				|| (req.session.lastAccess && (now - req.session.lastAccess) < 120000)) {
+			//No caduca
+			req.session.lastAccess = now;
+			res.locals.session = req.session;
+		} else {
+			//Caducado - para mantener la página de destino, no puedo redirigir a logout
+			//marcando la página de vuelta login, pues entraría en bucle; 
+			//forzar cierre y redirección sin saltar a otro middleware
+			delete req.session.lastAccess;
+			delete req.session.user;
+			req.session.redir = req.path;
+			res.locals.session = req.session;
+			res.redirect('/login');
+			return;
+		}
+	}
+	next();
+});
+
 //Helpers dinamicos
 app.use(function(req, res, next) {
 	//guardar path en la session.redir para despues del login
