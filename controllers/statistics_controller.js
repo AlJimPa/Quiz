@@ -23,7 +23,7 @@ exports.show = function(req, res) {
 			estadisticas.promedioComentariosPorPregunta.valor 
 					= (estadisticas.countComentarios.valor / estadisticas.countPreguntas.valor) || 0;
 			//El número de preguntas con comentarios
-			return models.Comment.aggregate("quizId", "count", {distinct: true});
+			return models.Comment.aggregate("QuizId", "count", {distinct: true});
 		}
 	).then(
 		function(recuento) {
