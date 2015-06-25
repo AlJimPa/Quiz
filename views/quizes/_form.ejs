@@ -3,21 +3,12 @@
 		<label for="resp" class="rem">Respuesta:</label>
 		<input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>" />
 		<label for="selectTema" class="rem">Tema:</label>
-		<select name="quiz[tema]" value="<%= quiz.tema %>" id="selectTema">
-			<!-- Método 1 - temas hardcoded, campo en base de datos como enum -->
-			<option value="otro">Otro</option>
-			<option value="humanidades">Humanidades</option>
-			<option value="ocio">Ocio</option>
-			<option value="ciencia">Ciencia</option>
-			<option value="tecnologia">Tecnología</option>
-			<!-- Método 2 - temas en otra tabla de base de datos, con pares valor - id -->
-		<!-- //TODO [temas]
-			< for (var t in listaTemas) { %>
-			<option value="<= listaTemas[t] %>"><= t %></option>
-			< } %>
-		-->
+		<select name="quiz[ThemeId]" id="selectTema">
+			<% for (var t in temas) { %>
+			<option value="<%= temas[t].id %>"><%= temas[t].texto %></option>
+			<% } %>
 		</select>
-		<script>document.getElementById("selectTema").value="<%= quiz.tema %>"</script>
+		<script>document.getElementById("selectTema").value="<%= quiz.ThemeId %>"</script>
 		<div display="block">
 			<a href="/quizes"><button type="button" name="Cancelar">Cancelar</button></a>
 			<input type="submit" value="Salvar" />
